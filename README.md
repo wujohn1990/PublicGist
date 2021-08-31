@@ -6,3 +6,6 @@ Gist, Notes, Snippets
 
 use tor as a proxy pool
 
+## kucoin_data.py
+
+kucoin streaming data recorder utilizing the thread-safe logging module and zstandard/gzip compression
