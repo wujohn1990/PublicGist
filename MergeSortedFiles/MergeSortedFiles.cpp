@@ -31,7 +31,7 @@ class NamedRowCompareLess
 public:
     int m_columnIndex; // the column to compare
 
-    NamedRowCompareLess(int idx)
+    explicit NamedRowCompareLess(int idx)
     : m_columnIndex(idx)
     {
     }
@@ -86,8 +86,9 @@ void mergeFiles(std::vector<string> inputFiles, int columnIndex, std::string out
 
     csv::CSVRow row;
     std::string line;
+    NamedRowCompareLess rowComparator(columnIndex);
 
-    std::priority_queue<NamedRow, std::vector<NamedRow>, NamedRowCompareLess > data_queue(columnIndex);
+    std::priority_queue<NamedRow, std::vector<NamedRow>, NamedRowCompareLess > data_queue(rowComparator);
 
     // read in first line of each file
     for (int i = 0; i < filenames.size(); i++)
