@@ -9,4 +9,6 @@
     - b) we use an ID parameter in the filename (like a global YYYYMMDDHHMM id, but this also does duplicate jobs)
     - c) orchestra all the dependentent tasks in one manager  
 
-2. can pass in parameters, and on web ui, tasks can be filtered by paramters
+2. output file mode cannot be append
+
+3. can pass in parameters, and on web ui, tasks can be filtered by paramters
