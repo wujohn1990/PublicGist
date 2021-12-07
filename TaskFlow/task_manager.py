@@ -11,10 +11,8 @@ def get_args():
     args, unknownargs = parser.parse_known_args()
 
     return args
-class GlobalParams(luigi.Config):
-    id = luigi.IntParameter(default = 5)
-
 class int_range(luigi.Task):
+    id = luigi.IntParameter()
     cur_time = 20211206
     def requires(self):
         return None
@@ -29,10 +27,10 @@ class int_range(luigi.Task):
         time.sleep(2)
 
 class square_int_range(luigi.Task):
-    id = GlobalParams().id
+    id = luigi.IntParameter()
     cur_time = 20211206
     def requires(self):
-        return int_range()
+        return int_range(id = self.id)
     def output(self):
         return luigi.LocalTarget(os.path.dirname(self.input().path) + f'square_int_range_{self.cur_time}.txt')
     def run(self):
@@ -44,7 +42,7 @@ class square_int_range(luigi.Task):
         time.sleep(5)
 
 if __name__ == '__main__':
-    # args = get_args()
-    # luigi.run(['square_int_range', '--workers', '1', '--scheduler-host','localhost'
-            #    '--GlobalParams-id', f"{args.id}"])
-    luigi.run()
+    args = get_args()
+    luigi.run(['--workers', '1', '--scheduler-host','localhost'
+               ,'square_int_range','--id', f"{args.id}"])
+               
